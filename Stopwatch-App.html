@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch App</title>
+</head>
+<style>
+    *{
+      margin: 0;
+      padding:0;
+    }
+    body {
+      width: 100%;
+      height:100vh;
+      background-image:url("https://freepowerpointtemplates.com/wp-content/uploads/Time-Clock-Featured-FreePowerPointTemplates.png");
+      background-position: center;
+      background-size: cover;
+      display: grid;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Ubuntu',sans-serif;
+    }
+
+    .container {
+      padding: 2rem;
+      max-width: 300px;
+      height: auto;
+      text-align: center;
+      position: relative;
+      border-radius: 10px;
+      border-style:dashed;
+      border-color: #4402f8;
+      background-image: linear-gradient(rgba(0, 0, 0, 0.719),rgb(105, 107, 109));
+    }
+
+    .time {
+      padding: 1rem 2rem;
+      font-size: 3rem;
+      color: #faf5f5ec;
+    }
+
+    h1,
+    p {
+      color: #fbfcff;
+    }
+    h3{
+      color: #8a90c0;
+    }
+
+    button {
+      padding: 0.4rem 1rem;
+      margin: 0 0.2rem;
+      font-size: medium;
+      border-radius: 10px;
+      border: 1px solid #f8f8f8;
+      font: 'Roboto',sans-serif;
+    }
+
+    button:hover {
+      background-color: rgba(95, 26, 245, 0.4);
+      color: #f8f8f8;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <h1>STOPWATCH APP </h1>
+      <h2>(BY POORNESH V)</h2>
+      <p class="time">
+        <span id="minutes">00</span>:<span id="seconds">00</span>:<span
+          id="tens"
+          >00</span
+        >
+      </p>
+      <button id="start">START</button>
+      <button id="stop">STOP</button>
+      <button id="reset">RESET</button>
+    </div>
+  </body>
+
+  <script>
+    window.onload = function () {
+      let minutes = 0;
+      let seconds = 0;
+      let tens = 0;
+      let appendMinutes = document.querySelector('#minutes');
+      let appendTens = document.querySelector('#tens');
+      let appendSeconds = document.querySelector('#seconds');
+      let startBtn = document.querySelector('#start');
+      let stopBtn = document.querySelector('#stop');
+      let resetBtn = document.querySelector('#reset');
+      let Interval;
+
+      const startTimer = () => {
+        tens++;
+        if (tens <= 9) {
+          appendTens.innerHTML = '0' + tens;
+        }
+        if (tens > 9) {
+          appendTens.innerHTML = tens;
+        }
+
+        if (tens > 99) {
+          seconds++;
+          appendSeconds.innerHTML = '0' + seconds;
+          tens = 0;
+          appendTens.innerHTML = '0' + 0;
+        }
+
+        if (seconds > 9) {
+          appendSeconds.innerHTML = seconds;
+        }
+
+        if (seconds > 59) {
+          minutes++;
+          appendMinutes.innerHTML = '0' + minutes;
+          seconds = 0;
+          appendSeconds.innerHTML = '0' + 0;
+        }
+      };
+
+      startBtn.onclick = () => {
+        clearInterval(Interval);
+        Interval = setInterval(startTimer, 10);
+      };
+
+      stopBtn.onclick = () => {
+        clearInterval(Interval);
+      };
+
+      resetBtn.onclick = () => {
+        clearInterval(Interval);
+        tens = '00';
+        seconds = '00';
+        minutes = '00';
+        appendTens.innerHTML = tens;
+        appendSeconds.innerHTML = seconds;
+        appendMinutes.innerHMTL = minutes;
+      };
+    };
+  </script>
+</html>
